@@ -1,0 +1,36 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+
+# Compilados y logs
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+
+# Archivos generados en tiempo de ejecución por JADE
+APDescription.txt
+MTPs-Main-Container.txt
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Variables de entorno / secretos (si los usas más adelante)
+.env
+.env.*

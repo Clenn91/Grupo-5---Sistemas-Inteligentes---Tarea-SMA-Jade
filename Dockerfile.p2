@@ -1,0 +1,16 @@
+FROM eclipse-temurin:11-jre-jammy
+
+WORKDIR /app
+
+COPY target/sma-jade-cultivo-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+
+EXPOSE 1099
+
+# -host y -port → conectarse a la plataforma principal (P1)
+# Los agentes de análisis van aquí
+CMD ["java", "-jar", "app.jar", \
+     "-container", \
+     "-host", "jade-p1", \
+     "-port", "1099", \
+     "-local-host", "jade-p2", \
+     "-agents", "analizador:com.cultivo.agentes.AgenteAnalizador;controlRiego:com.cultivo.agentes.AgenteControlRiego"]

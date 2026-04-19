@@ -1,0 +1,44 @@
+services:
+  # Plataforma 1: Main Container con los sensores
+  jade-p1:
+    build:
+      context: .
+      dockerfile: Dockerfile.p1
+    container_name: jade-p1
+    working_dir: /app
+    networks:
+      - jade-network
+    ports:
+      - "1099:1099"
+      - "7778:7778"
+    # Sin -nogui: en JADE 4.5 Boot no existe esa opción; se interpreta como propiedad y rompe el parseo.
+    command:
+      - java
+      - -jar
+      - app.jar
+      - -local-host
+      - jade-p1
+      - -local-port
+      - "1099"
+      - -agents
+      - "sensorTemp:com.cultivo.agentes.AgenteSensorTemperatura;sensorHum:com.cultivo.agentes.AgenteSensorHumedad"
+
+  jade-p2:
+    build:
+      context: .
+      dockerfile: Dockerfile.p2
+    container_name: jade-p2
+    working_dir: /app
+    networks:
+      - jade-network
+    depends_on:
+      - jade-p1
+    # Solo el sleep pasa por shell; -agents va entre comillas dobles para un solo token
+    command:
+      - /bin/sh
+      - -c
+      - 'sleep 5 && exec java -jar app.jar -container -host jade-p1 -port 1099 -local-host jade-p2 -agents "analizador:com.cultivo.agentes.AgenteAnalizador;controlRiego:com.cultivo.agentes.AgenteControlRiego"'
+
+networks:
+  jade-network:
+    driver: bridge

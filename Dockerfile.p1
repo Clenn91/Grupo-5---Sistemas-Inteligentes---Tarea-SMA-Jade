@@ -1,0 +1,19 @@
+# Usamos Java 11
+FROM eclipse-temurin:11-jre-jammy
+
+# Crear carpeta de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar el JAR que generamos con Maven
+COPY target/sma-jade-cultivo-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+
+# Exponer puerto de JADE para comunicación entre plataformas
+EXPOSE 1099
+EXPOSE 7778
+
+# Comando de arranque (JADE 4.5 Boot no reconoce -nogui; en contenedor sin DISPLAY no hace falta -gui)
+# -agents      → qué agentes lanzar y con qué nombres
+CMD ["java", "-jar", "app.jar", \
+     "-local-host", "jade-p1", \
+     "-local-port", "1099", \
+     "-agents", "sensorTemp:com.cultivo.agentes.AgenteSensorTemperatura;sensorHum:com.cultivo.agentes.AgenteSensorHumedad"]
