@@ -2,9 +2,11 @@
 
 ## Integrantes
 
-- 
-- 
-- 
+- Quiñonez Rivera, Esteban
+- Palomino Julian, Alex Marcelo
+- Rojas Carrasco, Alessandro del Piero
+- Tintaya Avila Daniel
+- Flores Moreno, Juan Diego
 
 ## Descripción
 
@@ -44,7 +46,7 @@ mvn clean package -DskipTests
 **Qué hace:**
 
 - **`clean`**: borra la carpeta `target` para evitar restos de compilaciones anteriores.
-- **`package`**: compila el código y ejecuta el empaquetado (incluye el assembly *jar-with-dependencies* con `jade.Boot` como clase principal).
+- **`package`**: compila el código y ejecuta el empaquetado (incluye el assembly _jar-with-dependencies_ con `jade.Boot` como clase principal).
 - **`-DskipTests`**: omite la fase de tests (útil si no hay tests o quieres acelerar el build).
 
 El JAR resultante (con sufijo `-jar-with-dependencies`) es el que copian los Dockerfiles como `app.jar`.
@@ -69,4 +71,4 @@ Para detener: `Ctrl+C` (si está en primer plano) o `docker compose down`.
 
 ---
 
-*Curso: Software Inteligente — Tarea SMA JADE.*
+_Curso: Software Inteligente — Tarea SMA JADE._
